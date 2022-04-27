@@ -46,6 +46,8 @@
 		-o-backface-visibility: hidden;
 		backface-visibility: hidden;
 		position: absolute;
+        box-sizing: content-box;
+        padding-bottom:50px;
 		top: 0;
 		left: 0;
 		width: 100%;
@@ -54,21 +56,34 @@
 		-moz-box-shadow: 0 10px 15px rgba(0,0,0,0.5);
 		box-shadow: 0 10px 15px rgba(0,0,0,0.5);
 		.transform(0deg);
+        
+        .item-index{
+			position: relative;
+			display:inline-block;
+            margin-right:10px;
+			font-size: 22px;
+			line-height: 100%;
+			padding: 7px 12px;
+			background-color:@primary-color-inverted;
+			color: @black;
+		}
 
 		.flipper-item-title {
 			background: @primary-color;
 			color: @primary-color-inverted;
-			padding: 20px;
+			padding: 10px 20px;
 		}
 
 		.flipper-item-body {
 			background: @primary-color-inverted;
-			padding: 20px 20px 50px;
+			padding: 20px 20px 20px;
 			color: @font-color;
 		}
 
 		.flipper-item-img {
 			vertical-align: bottom;
+            box-sizing:border-box;
+            padding:0 20px;
 		}
 
 		.flipper-item-instruction {
@@ -76,7 +91,7 @@
 			margin: 20px;
 			bottom: 0;
 			right: 0;
-			color: @primary-color;
+			//color: @primary-color;
 		}
 
 		&.state-0 {
