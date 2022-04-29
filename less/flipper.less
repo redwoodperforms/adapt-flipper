@@ -86,14 +86,63 @@
             padding:0 20px;
 		}
 
-		.flipper-item-instruction {
+			.flipper-item-next-button {
 			position: absolute;
 			margin: 20px;
 			bottom: 0;
 			right: 0;
 			//color: @primary-color;
+			
 		}
+		.flipper-item-complete-button{
+			position: absolute;
+			margin: 20px;
+			bottom: 0;
+			right: 0;
+		}
+		.flipper-item-previous-button{
+			position: absolute;
+			margin: 20px;
+			bottom: 0;
+			left: 0;
+		}
+		// &.state-0 {
+		// 	.transform(-180deg);
+		// }
+		// &.state-1 {
+		// 	.transform(0deg);
+		// }
+		// &.state-2 {
+		// 	.transform(180deg);
+		// }
+	}
 
+
+}
+.flipperFocus:focus-within {
+
+		outline: #000 auto 2px !important;
+		outline-offset: 4px !important;
+	
+	  
+  }
+  
+.prev-direction{
+	.flipper-item {
+		&.state-0 {
+			.transform(180deg);
+		}
+		&.state-1 {
+			.transform(0deg);
+		}
+		&.state-2 {
+			.transform(-180deg);
+		}
+	}
+}
+
+.next-direction{
+	.flipper-item {
 		&.state-0 {
 			.transform(-180deg);
 		}
@@ -104,8 +153,6 @@
 			.transform(180deg);
 		}
 	}
-
-
 }
 
 .transform(@angle) {
