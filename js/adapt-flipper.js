@@ -82,6 +82,7 @@ define(function (require) {
         },
 
         onNextBtnClick: function () {
+
             if (this.locked) return;
             this.setLock();
             var numItems = this.model.get("_items").length;
@@ -92,11 +93,19 @@ define(function (require) {
             if (!stage == 0 && this.shouldPrevEnabled) {
                 this.$(".flipper-item-previous-button").removeAttr("disabled");
             }
+
+            if (numItems - 1 == stage) {
+                this.$(".flipper-item-next-button").attr("disabled", true);
+            }
+
             this.$(".state-1 > .flipper-item-title").attr("tabindex", 0).focus();
 
             if (numItems - 1 === stage) {
                 this.setCompletionStatus();
+
             }
+
+
         },
 
         onPreviousBtnClick: function () {
@@ -113,7 +122,9 @@ define(function (require) {
             if (stage == 0 && this.shouldPrevEnabled) {
                 this.$(".flipper-item-previous-button").attr("disabled", true);
             }
-
+            if (numItems - 1 !== stage) {
+                this.$(".flipper-item-next-button").removeAttr("disabled", true);
+            }
             this.$(".flipper").removeClass("next-direction");
             this.$(".flipper").addClass("prev-direction");
 
