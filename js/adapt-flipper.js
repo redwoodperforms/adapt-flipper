@@ -8,7 +8,7 @@ define(function (require) {
         events: {
             "click .flipper-item-next-button": "onNextBtnClick",
             "click .flipper-item-previous-button": "onPreviousBtnClick",
-            "click .flipper-item-complete-button": "onCompleteBtnClick"
+            // "click .flipper-item-complete-button": "onCompleteBtnClick"
         },
 
         preRender: function () {
@@ -85,15 +85,26 @@ define(function (require) {
 
             if (this.locked) return;
             this.setLock();
+            var numItems = this.model.get("_items").length;
             var stage = this.model.get("_stage") + 1;
-            console.log("next btn stage" + stage);
             this.$(".flipper").removeClass("prev-direction");
             this.$(".flipper").addClass("next-direction");
             this.setStage(stage);
             if (!stage == 0 && this.shouldPrevEnabled) {
                 this.$(".flipper-item-previous-button").removeAttr("disabled");
             }
+
+            if (numItems - 1 == stage) {
+                this.$(".flipper-item-next-button").attr("disabled", true);
+            }
+
             this.$(".state-1 > .flipper-item-title").attr("tabindex", 0).focus();
+
+            if (numItems - 1 === stage) {
+                this.setCompletionStatus();
+
+            }
+
 
         },
 
@@ -111,7 +122,9 @@ define(function (require) {
             if (stage == 0 && this.shouldPrevEnabled) {
                 this.$(".flipper-item-previous-button").attr("disabled", true);
             }
-
+            if (numItems - 1 !== stage) {
+                this.$(".flipper-item-next-button").removeAttr("disabled", true);
+            }
             this.$(".flipper").removeClass("next-direction");
             this.$(".flipper").addClass("prev-direction");
 
@@ -125,22 +138,22 @@ define(function (require) {
 
         },
 
-        onCompleteBtnClick: function () {
+        // onCompleteBtnClick: function () {
 
-            if (this.locked) return;
-            this.setLock();
-            var stage = this.model.get("_stage") + 1;
-            var numItems = this.model.get("_items").length;
-            if (stage === numItems) {
-                stage = 0;
-            }
-            this.setStage(stage);
-            this.$(".flipper-item-previous-button").removeAttr("disabled");
-            this.$(".state-1 > .flipper-item-title").attr("tabindex", 0).addClass("flipperFocus");
+        //     if (this.locked) return;
+        //     this.setLock();
+        //     var stage = this.model.get("_stage") + 1;
+        //     var numItems = this.model.get("_items").length;
+        //     if (stage === numItems) {
+        //         stage = 0;
+        //     }
+        //     this.setStage(stage);
+        //     this.$(".flipper-item-previous-button").removeAttr("disabled");
+        //     this.$(".state-1 > .flipper-item-title").attr("tabindex", 0).addClass("flipperFocus");
 
-            this.shouldPrevEnabled = false;
-            this.setCompletionStatus();
-        },
+        //     this.shouldPrevEnabled = false;
+        //     // this.setCompletionStatus();
+        // },
 
         setLock: function () {
             var $flipper = this.$(".flipper");

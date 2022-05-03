@@ -54,7 +54,8 @@
 			"title": "That's it",
 			"body": "Happy flipping!",
 			"previousButton": "&laquo; Previous",
-			"completeButton": "Complete ✔"
+			"nextButton": "Next &raquo;",
+			"completeLable": "Completed ✔"
 		}
 	]
 },
